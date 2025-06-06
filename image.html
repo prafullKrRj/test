@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LCS Solved - YouTube Thumbnail</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .container {
+            width: 1280px;
+            height: 720px;
+            position: relative;
+            background-image: url('background.png');
+            background-size: cover;
+            background-position: center;
+            font-family: 'Montserrat', sans-serif;
+            overflow: hidden;
+        }
+
+        .main-title {
+            position: absolute;
+            top: 40px;
+            left: 60px;
+            font-size: 64px;
+            font-weight: 900;
+            line-height: 1.1;
+            background: linear-gradient(135deg, #ffffff 0%, #00ff88 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+            letter-spacing: -1px;
+        }
+
+        .subtitle {
+            position: absolute;
+            top: 260px;
+            left: 60px;
+            font-size: 32px;
+            font-weight: 700;
+            color: #ffffff;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
+            margin-top: 30px;
+        }
+
+        .checkmark {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: #00ff88;
+            border-radius: 50%;
+            margin-left: 15px;
+            position: relative;
+            vertical-align: middle;
+        }
+
+        .checkmark::after {
+            content: '✓';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .code-block {
+            position: absolute;
+            top: 360px;
+            left: 60px;
+            font-family: 'Courier New', monospace;
+            font-size: 24px;
+            line-height: 1.6;
+            margin-top: 40px;
+        }
+
+        .code-line {
+            margin-bottom: 12px;
+        }
+
+        .string1 {
+            color: #00ffff;
+        }
+
+        .string2 {
+            color: #ffff00;
+        }
+
+        .logic {
+            color: #ff8800;
+        }
+
+        .return-statement {
+            color: #ff6b6b;
+        }
+
+        .arrow {
+            position: absolute;
+            top: 430px;
+            left: 420px;
+            width: 80px;
+            height: 4px;
+            background: #ff4444;
+            border-radius: 2px;
+            transform: rotate(-15deg);
+        }
+
+        .arrow::after {
+            content: '';
+            position: absolute;
+            right: -8px;
+            top: -8px;
+            width: 0;
+            height: 0;
+            border-left: 16px solid #ff4444;
+            border-top: 8px solid transparent;
+            border-bottom: 8px solid transparent;
+        }
+
+        .result-box {
+            position: absolute;
+            top: 480px;
+            left: 500px;
+            background: rgba(0, 0, 0, 0.8);
+            border: 3px solid #ffff00;
+            border-radius: 12px;
+            padding: 15px 25px;
+            font-family: 'Courier New', monospace;
+            font-size: 20px;
+            color: #00ffff;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="main-title">
+        LONGEST COMMON<br>
+        SUBSEQUENCE<br>
+        <span style="color: #00ff88;">SOLVED!</span>
+    </div>
+
+    <div class="subtitle">
+        LeetCode #1143 • Easy to Understand <span class="checkmark"></span>
+    </div>
+
+    <div class="code-block">
+        <div class="code-line">
+            <span class="string1">text1 = "abcde"</span>, <span class="string2">text2 = "ace"</span>
+        </div>
+        <div class="code-line">
+            <span class="logic">dp[i][j] = max(dp[i-1][j], dp[i][j-1])</span>
+        </div>
+        <div class="code-line">
+            <span class="return-statement">return dp[m][n]</span>
+        </div>
+    </div>
+
+    <div class="arrow"></div>
+
+    <div class="result-box">
+        LCS Length = 3<br>
+        Sequence: "ace"
+    </div>
+</div>
+</body>
+</html>
