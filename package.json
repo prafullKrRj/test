@@ -9,8 +9,8 @@
     "pipeline": "node pipeline.js"
   },
   "dependencies": {
-    "puppeteer": "^21.0.0",
-    "node-fetch": "^3.3.2"
+    "node-fetch": "^2.7.0",
+    "puppeteer": "^21.0.0"
   },
   "engines": {
     "node": ">=16.0.0"

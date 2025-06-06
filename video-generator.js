@@ -21,171 +21,146 @@ class LeetCodeVideoGenerator {
         const category = questionData.category || 'Data Structures & Algorithms';
         const description = questionData.description || 'A challenging programming problem.';
 
-        return `You are a precision video script generator for LeetCode tutorials. Create EXACTLY 8 scenes with precise timing and concise, non-overlapping content.
+        return `Create a concise 8-scene LeetCode tutorial script focused on clear explanations and data structure visualization.
 
-STRICT REQUIREMENTS:
-- Each script must be EXACTLY 25-35 words per scene (for precise timing)
-- Focus on core concepts only, no filler words
-- Include specific data structure visualizations
-- Mention exact array indices, hash table operations, etc.
-- Scripts must be educational but concise
+REQUIREMENTS:
+- Each scene: 20-25 words (concise and clear)
+- Focus on algorithm explanation, not storytelling
+- Emphasize data structure operations
+- Technical accuracy over engagement tricks
+- Direct, educational tone
 
 PROBLEM: ${title} (${difficulty})
 CATEGORY: ${category}
-DESCRIPTION: ${description}
 
-Return ONLY this JSON (no markdown, no explanations):
+Return ONLY this JSON:
 
 {
   "metadata": {
-    "title": "${title} - LeetCode Solution",
-    "duration": "8 minutes",
-    "topic": "${category}",
+    "title": "${title}",
+    "duration": "6 minutes",
     "difficulty": "${difficulty}",
-    "total_scenes": 8,
-    "theme": "minimal_black",
-    "primary_color": "#00ff88",
-    "secondary_color": "#0088ff", 
-    "background_color": "#000000",
-    "text_color": "#ffffff",
-    "accent_color": "#ff4444",
-    "problem_url": "${questionData.link || 'https://leetcode.com/problems/'}",
-    "target_audience": "Interview Preparation"
+    "theme": "minimal_tech"
   },
   "scenes": [
     {
       "scene_id": 1,
-      "timestamp": "00:00-01:00",
-      "title": "Problem Statement",
-      "script": "${title}: Given array of integers and target, return indices where two numbers sum to target. Each input has exactly one solution.",
-      "data_structures": ["array"],
-      "key_concepts": ["two_pointer", "indices"]
+      "timestamp": "00:00-00:45",
+      "title": "Problem Overview",
+      "script": "Problem: Find two array indices where numbers sum to target. Input: array and target integer. Output: two indices. Constraint: exactly one solution exists.",
+      "focus": "problem_statement"
     },
     {
       "scene_id": 2,
-      "timestamp": "01:00-02:00", 
-      "title": "Example Visualization",
-      "script": "Example: nums=[2,7,11,15], target=9. We need indices where nums[i]+nums[j]=target. Answer: [0,1] because nums[0]+nums[1]=2+7=9.",
-      "data_structures": ["array", "indices"],
-      "key_concepts": ["example_trace", "sum_calculation"]
+      "timestamp": "00:45-01:30",
+      "title": "Example Walkthrough",
+      "script": "Example: nums=[2,7,11,15], target=9. Check: 2+7=9 at indices 0,1. Answer: [0,1]. Visual: highlight matching pair in array representation.",
+      "focus": "example_demonstration"
     },
     {
       "scene_id": 3,
-      "timestamp": "02:00-03:00",
-      "title": "Brute Force Approach", 
-      "script": "Brute force: nested loops check every pair. Outer loop i=0 to n-2, inner loop j=i+1 to n-1. Time O(n²), Space O(1).",
-      "data_structures": ["nested_loops"],
-      "key_concepts": ["time_complexity", "space_complexity"]
+      "timestamp": "01:30-02:15",
+      "title": "Brute Force Analysis",
+      "script": "Brute force: nested loops check all pairs. Outer loop i=0 to n-2, inner j=i+1 to n-1. Time complexity O(n²), space O(1).",
+      "focus": "complexity_analysis"
     },
     {
       "scene_id": 4,
-      "timestamp": "03:00-04:00",
-      "title": "Hash Map Optimization",
-      "script": "Optimal: Use hash map to store value→index mapping. For each number, check if target-number exists in map. Time O(n), Space O(n).",
-      "data_structures": ["hash_map", "array"],
-      "key_concepts": ["complement", "lookup"]
+      "timestamp": "02:15-03:00",
+      "title": "Hash Map Approach",
+      "script": "Optimal solution: use hash map for O(1) lookups. Store number→index pairs. For each element, check if complement exists in map.",
+      "focus": "data_structure_introduction"
     },
     {
       "scene_id": 5,
-      "timestamp": "04:00-05:00",
+      "timestamp": "03:00-03:45",
       "title": "Algorithm Implementation",
-      "script": "Code: Create empty map. Iterate array: complement=target-nums[i]. If complement in map, return [map[complement], i]. Else map[nums[i]]=i.",
-      "data_structures": ["hash_map", "variables"],
-      "key_concepts": ["algorithm_steps", "implementation"]
+      "script": "Algorithm: iterate array, calculate complement=target-current. If complement in map, return indices. Else store current number and index in map.",
+      "focus": "algorithm_steps"
     },
     {
       "scene_id": 6,
-      "timestamp": "05:00-06:00",
-      "title": "Step-by-Step Trace",
-      "script": "Trace [2,7,11,15], target=9: i=0, complement=7, map empty, store map[2]=0. i=1, complement=2, found map[2]=0, return [0,1].",
-      "data_structures": ["execution_trace", "hash_map"],
-      "key_concepts": ["step_by_step", "variable_tracking"]
+      "timestamp": "03:45-04:30",
+      "title": "Step-by-Step Execution",
+      "script": "Trace: i=0, nums[0]=2, complement=7, map empty, store map[2]=0. i=1, nums[1]=7, complement=2, found map[2]=0, return [0,1].",
+      "focus": "execution_trace"
     },
     {
       "scene_id": 7,
-      "timestamp": "06:00-07:00",
+      "timestamp": "04:30-05:15",
       "title": "Edge Cases",
-      "script": "Edge cases: duplicate values [3,3], target=6 returns [0,1]. Empty array impossible. Single element impossible. All cases handled by algorithm.",
-      "data_structures": ["special_arrays"],
-      "key_concepts": ["edge_cases", "validation"]
+      "script": "Edge cases: duplicate values [3,3] target=6 returns [0,1]. Negative numbers handled normally. Single element impossible by constraint.",
+      "focus": "edge_case_handling"
     },
     {
       "scene_id": 8,
-      "timestamp": "07:00-08:00",
+      "timestamp": "05:15-06:00",
       "title": "Complexity Summary",
-      "script": "Final solution: Time O(n) single pass, Space O(n) hash map storage. Optimal for interview. Pattern applies to similar complement-finding problems.",
-      "data_structures": ["complexity_chart"],
-      "key_concepts": ["big_o", "optimization"]
+      "script": "Final complexity: Time O(n) single pass, Space O(n) hash map storage. Pattern applies to complement-finding problems like 3Sum.",
+      "focus": "complexity_and_patterns"
     }
   ]
 }`;
     }
 
     createVideoCodeGenerationPrompt(scriptJson) {
-        return `You are a precision HTML/CSS generator for technical video content. Create pixel-perfect, minimalistic designs with ZERO text overflow.
+        return `Generate minimal, clean HTML for technical LeetCode tutorial scenes. Focus on data structure visualization and code clarity.
 
-CRITICAL REQUIREMENTS:
-- Pure black background (#000000) ONLY
-- Font sizes calculated to fit 1920x1080 exactly
-- No text must exceed container bounds
-- Data structures rendered as clean visual diagrams
-- Monospace font for all code
-- White text (#ffffff) with accent colors for highlighting
-- Maximum content width: 1800px (100px margin each side)
-- Maximum content height: 980px (50px margin top/bottom)
+DESIGN PRINCIPLES:
+- Clean white/light backgrounds
+- Simple sans-serif fonts
+- Clear data structure diagrams
+- Minimal colors: #2563eb (blue), #059669 (green), #dc2626 (red), #374151 (gray)
+- No animations or fancy effects
+- Channel logo: simple text top-right
 
-SCENE CONTENT: ${JSON.stringify(scriptJson, null, 2)}
+CONTENT: ${JSON.stringify(scriptJson, null, 2)}
 
-For each scene, create appropriate visualizations:
-- Arrays: horizontal boxes with indices
-- Hash Maps: key→value pairs in tables
-- Code: syntax highlighted with line numbers
-- Traces: step-by-step variable states
-- Complexity: clean O(n) notation
-
-Return ONLY this JSON structure with complete HTML for all ${scriptJson.scenes?.length || 8} scenes:
+Return ONLY this JSON:
 
 {
   "metadata": {
-    "theme": "ultra_minimal",
-    "primary_color": "#00ff88",
-    "secondary_color": "#0088ff",
-    "background_color": "#000000", 
-    "text_color": "#ffffff",
-    "accent_color": "#ff4444"
+    "theme": "minimal_clean",
+    "colors": {
+      "primary": "#2563eb",
+      "success": "#059669", 
+      "warning": "#dc2626",
+      "text": "#374151",
+      "background": "#ffffff"
+    }
   },
   "scenes": [
     {
       "scene_id": 1,
-      "html": "<div class='title primary' style='font-size: 64px; font-weight: bold; margin-bottom: 40px; text-align: center;'>${scriptJson.metadata?.title || 'LeetCode Problem'}</div><div class='subtitle secondary' style='font-size: 32px; margin-bottom: 60px; text-align: center;'>Problem Statement & Analysis</div><div class='content' style='font-size: 24px; line-height: 1.6; max-width: 1400px; text-align: center;'>Given an array of integers and a target value,<br>find <span class='accent' style='color: #ff4444; font-weight: bold;'>two indices</span> where numbers sum to target.<br><br><span class='accent' style='color: #ff4444;'>Constraint:</span> Exactly one solution exists.</div>"
+      "html": "<div style='background:#f9fafb;height:100vh;font-family:Inter,sans-serif;padding:40px'><div style='position:absolute;top:20px;right:30px;color:#6b7280;font-weight:600'>CodeMaster</div><div style='max-width:800px;margin:0 auto;padding-top:100px'><h1 style='font-size:36px;color:#374151;margin-bottom:20px'>${scriptJson.metadata?.title || 'Two Sum Problem'}</h1><div style='background:#fff;padding:30px;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,0.1)'><h2 style='color:#2563eb;margin-bottom:15px'>Problem Statement</h2><p style='font-size:18px;line-height:1.6;color:#374151'>Given an array of integers and target value, return indices of two numbers that sum to target.</p><div style='background:#f3f4f6;padding:15px;border-radius:6px;margin-top:15px;font-family:monospace'><strong>Input:</strong> nums = [2,7,11,15], target = 9<br><strong>Output:</strong> [0,1]<br><strong>Explanation:</strong> nums[0] + nums[1] = 2 + 7 = 9</div></div></div></div>"
     },
     {
       "scene_id": 2,
-      "html": "<div class='title secondary' style='font-size: 48px; margin-bottom: 40px; text-align: center;'>Example Visualization</div><div class='array-demo' style='display: flex; flex-direction: column; align-items: center; gap: 30px;'><div class='array-container' style='display: flex; gap: 15px; align-items: center;'><div class='array-label' style='font-size: 28px; margin-right: 20px;'>nums =</div><div class='array-element' style='background: #1a1a1a; border: 2px solid #333; padding: 15px 20px; font-size: 24px; position: relative;'>2<div style='position: absolute; bottom: -25px; left: 50%; transform: translateX(-50%); font-size: 16px; color: #888;'>0</div></div><div class='array-element' style='background: #1a1a1a; border: 2px solid #00ff88; padding: 15px 20px; font-size: 24px; position: relative; color: #00ff88;'>7<div style='position: absolute; bottom: -25px; left: 50%; transform: translateX(-50%); font-size: 16px; color: #888;'>1</div></div><div class='array-element' style='background: #1a1a1a; border: 2px solid #333; padding: 15px 20px; font-size: 24px; position: relative;'>11<div style='position: absolute; bottom: -25px; left: 50%; transform: translateX(-50%); font-size: 16px; color: #888;'>2</div></div><div class='array-element' style='background: #1a1a1a; border: 2px solid #333; padding: 15px 20px; font-size: 24px; position: relative;'>15<div style='position: absolute; bottom: -25px; left: 50%; transform: translateX(-50%); font-size: 16px; color: #888;'>3</div></div></div><div class='target' style='font-size: 28px; margin: 20px 0;'>target = <span class='accent' style='color: #ff4444;'>9</span></div><div class='result' style='font-size: 24px; color: #00ff88;'>Answer: [0, 1] because nums[0] + nums[1] = 2 + 7 = 9</div></div>"
+      "html": "<div style='background:#f9fafb;height:100vh;font-family:Inter,sans-serif;padding:40px'><div style='position:absolute;top:20px;right:30px;color:#6b7280;font-weight:600'>CodeMaster</div><div style='max-width:900px;margin:0 auto;padding-top:80px'><h2 style='font-size:28px;color:#374151;margin-bottom:30px;text-align:center'>Example Visualization</h2><div style='background:#fff;padding:40px;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,0.1)'><div style='text-align:center;margin-bottom:30px'><div style='font-size:16px;color:#6b7280;margin-bottom:15px'>nums = [2, 7, 11, 15], target = 9</div><div style='display:flex;justify-content:center;gap:10px;margin:20px 0'><div style='border:2px solid #2563eb;background:#dbeafe;padding:15px 20px;border-radius:6px;font-weight:600'>2<div style='font-size:12px;color:#6b7280;margin-top:5px'>index 0</div></div><div style='border:2px solid #059669;background:#d1fae5;padding:15px 20px;border-radius:6px;font-weight:600'>7<div style='font-size:12px;color:#6b7280;margin-top:5px'>index 1</div></div><div style='border:1px solid #d1d5db;padding:15px 20px;border-radius:6px;color:#6b7280'>11<div style='font-size:12px;margin-top:5px'>index 2</div></div><div style='border:1px solid #d1d5db;padding:15px 20px;border-radius:6px;color:#6b7280'>15<div style='font-size:12px;margin-top:5px'>index 3</div></div></div><div style='font-size:18px;color:#374151;margin-top:20px'>2 + 7 = 9 ✓</div><div style='background:#059669;color:white;padding:10px 20px;border-radius:6px;display:inline-block;margin-top:15px'>Answer: [0, 1]</div></div></div></div></div>"
     },
     {
       "scene_id": 3,
-      "html": "<div class='title accent' style='font-size: 48px; margin-bottom: 40px; text-align: center;'>Brute Force Approach</div><div class='algorithm-container' style='display: flex; flex-direction: column; align-items: center; gap: 40px;'><div class='nested-loops' style='background: #1a1a1a; padding: 30px; border-radius: 10px; font-family: monospace; font-size: 20px; line-height: 1.6;'><div>for (let i = 0; i < nums.length - 1; i++) {</div><div style='margin-left: 40px;'>for (let j = i + 1; j < nums.length; j++) {</div><div style='margin-left: 80px;'>if (nums[i] + nums[j] === target) {</div><div style='margin-left: 120px; color: #00ff88;'>return [i, j];</div><div style='margin-left: 80px;'>}</div><div style='margin-left: 40px;'>}</div><div>}</div></div><div class='complexity-analysis' style='display: flex; gap: 60px; font-size: 24px;'><div class='time-complexity'>Time: <span class='accent' style='color: #ff4444; font-weight: bold;'>O(n²)</span></div><div class='space-complexity'>Space: <span class='primary' style='color: #00ff88; font-weight: bold;'>O(1)</span></div></div></div>"
+      "html": "<div style='background:#f9fafb;height:100vh;font-family:Inter,sans-serif;padding:40px'><div style='position:absolute;top:20px;right:30px;color:#6b7280;font-weight:600'>CodeMaster</div><div style='max-width:800px;margin:0 auto;padding-top:80px'><h2 style='font-size:28px;color:#374151;margin-bottom:30px'>Brute Force Approach</h2><div style='background:#fff;padding:30px;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,0.1)'><div style='background:#1f2937;color:#f9fafb;padding:20px;border-radius:6px;font-family:monospace;font-size:14px;line-height:1.6'><div style='color:#6b7280'>// Brute Force Solution</div><div><span style='color:#3b82f6'>for</span> (let i = 0; i < nums.length - 1; i++) {</div><div>  <span style='color:#3b82f6'>for</span> (let j = i + 1; j < nums.length; j++) {</div><div>    <span style='color:#3b82f6'>if</span> (nums[i] + nums[j] === target) {</div><div>      <span style='color:#3b82f6'>return</span> [i, j];</div><div>    }</div><div>  }</div><div>}</div></div><div style='margin-top:20px;display:flex;gap:30px;justify-content:center'><div style='text-align:center'><div style='color:#dc2626;font-weight:600'>Time Complexity</div><div style='font-size:20px;color:#374151'>O(n²)</div></div><div style='text-align:center'><div style='color:#059669;font-weight:600'>Space Complexity</div><div style='font-size:20px;color:#374151'>O(1)</div></div></div></div></div></div>"
     },
     {
       "scene_id": 4,
-      "html": "<div class='title primary' style='font-size: 48px; margin-bottom: 40px; text-align: center;'>Hash Map Optimization</div><div class='hashmap-container' style='display: flex; flex-direction: column; align-items: center; gap: 40px;'><div class='concept' style='font-size: 24px; text-align: center; max-width: 1200px; line-height: 1.6;'>Store each number and its index in a hash map.<br>For each element, check if <span class='accent' style='color: #ff4444;'>complement = target - current</span> exists.</div><div class='hashmap-visual' style='display: flex; flex-direction: column; background: #1a1a1a; padding: 25px; border-radius: 10px;'><div class='hashmap-header' style='display: flex; font-size: 20px; font-weight: bold; border-bottom: 2px solid #333; padding-bottom: 10px; margin-bottom: 15px;'><div style='width: 150px; text-align: center; color: #0088ff;'>Value</div><div style='width: 80px; text-align: center;'>→</div><div style='width: 150px; text-align: center; color: #00ff88;'>Index</div></div><div class='hashmap-entry' style='display: flex; font-size: 18px; margin: 8px 0;'><div style='width: 150px; text-align: center; background: #333; padding: 8px; border-radius: 5px;'>2</div><div style='width: 80px; text-align: center; color: #888;'>→</div><div style='width: 150px; text-align: center; background: #333; padding: 8px; border-radius: 5px;'>0</div></div><div class='hashmap-entry' style='display: flex; font-size: 18px; margin: 8px 0;'><div style='width: 150px; text-align: center; background: #333; padding: 8px; border-radius: 5px;'>7</div><div style='width: 80px; text-align: center; color: #888;'>→</div><div style='width: 150px; text-align: center; background: #333; padding: 8px; border-radius: 5px;'>1</div></div></div><div class='complexity-improved' style='display: flex; gap: 60px; font-size: 24px;'><div class='time-complexity'>Time: <span class='primary' style='color: #00ff88; font-weight: bold;'>O(n)</span></div><div class='space-complexity'>Space: <span class='secondary' style='color: #0088ff; font-weight: bold;'>O(n)</span></div></div></div>"
+      "html": "<div style='background:#f9fafb;height:100vh;font-family:Inter,sans-serif;padding:40px'><div style='position:absolute;top:20px;right:30px;color:#6b7280;font-weight:600'>CodeMaster</div><div style='max-width:900px;margin:0 auto;padding-top:80px'><h2 style='font-size:28px;color:#374151;margin-bottom:30px'>Hash Map Solution</h2><div style='background:#fff;padding:30px;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,0.1)'><div style='margin-bottom:25px'><h3 style='color:#2563eb;margin-bottom:10px'>Key Insight</h3><p style='color:#374151;font-size:16px'>Use hash map to store seen numbers and their indices for O(1) lookup time.</p></div><div style='background:#f3f4f6;padding:20px;border-radius:6px;margin-bottom:20px'><h4 style='color:#374151;margin-bottom:15px'>Hash Map Structure</h4><div style='display:flex;justify-content:center;gap:40px'><div style='text-align:center'><div style='font-weight:600;color:#2563eb;margin-bottom:10px'>Value → Index</div><div style='font-family:monospace;font-size:14px'><div>2 → 0</div><div>7 → 1</div><div>11 → 2</div><div>15 → 3</div></div></div></div></div><div style='display:flex;gap:30px;justify-content:center'><div style='text-align:center'><div style='color:#059669;font-weight:600'>Time Complexity</div><div style='font-size:20px;color:#374151'>O(n)</div></div><div style='text-align:center'><div style='color:#dc2626;font-weight:600'>Space Complexity</div><div style='font-size:20px;color:#374151'>O(n)</div></div></div></div></div></div>"
     },
     {
       "scene_id": 5,
-      "html": "<div class='title secondary' style='font-size: 48px; margin-bottom: 30px; text-align: center;'>Algorithm Implementation</div><div class='code-container' style='background: #0a0a0a; border: 2px solid #333; border-radius: 10px; padding: 25px; font-family: monospace; max-width: 1400px;'><div class='code-header' style='color: #00ff88; font-size: 18px; margin-bottom: 20px; font-weight: bold;'>JavaScript Solution</div><div class='code-line' style='font-size: 16px; line-height: 1.8; margin: 4px 0;'><span style='color: #666; width: 30px; display: inline-block;'>1</span><span style='color: #0088ff;'>function</span> <span style='color: #ffffff;'>twoSum(nums, target) {</span></div><div class='code-line' style='font-size: 16px; line-height: 1.8; margin: 4px 0;'><span style='color: #666; width: 30px; display: inline-block;'>2</span><span style='margin-left: 20px; color: #0088ff;'>const</span> <span style='color: #ffffff;'>map = </span><span style='color: #0088ff;'>new</span> <span style='color: #ffffff;'>Map();</span></div><div class='code-line' style='font-size: 16px; line-height: 1.8; margin: 4px 0;'><span style='color: #666; width: 30px; display: inline-block;'>3</span><span style='margin-left: 20px; color: #0088ff;'>for</span> <span style='color: #ffffff;'>(</span><span style='color: #0088ff;'>let</span> <span style='color: #ffffff;'>i = 0; i < nums.length; i++) {</span></div><div class='code-line' style='font-size: 16px; line-height: 1.8; margin: 4px 0; background: rgba(255, 68, 68, 0.2); padding: 2px 5px;'><span style='color: #666; width: 30px; display: inline-block;'>4</span><span style='margin-left: 40px; color: #0088ff;'>const</span> <span style='color: #ffffff;'>complement = target - nums[i];</span></div><div class='code-line' style='font-size: 16px; line-height: 1.8; margin: 4px 0; background: rgba(255, 68, 68, 0.2); padding: 2px 5px;'><span style='color: #666; width: 30px; display: inline-block;'>5</span><span style='margin-left: 40px; color: #0088ff;'>if</span> <span style='color: #ffffff;'>(map.has(complement)) {</span></div><div class='code-line' style='font-size: 16px; line-height: 1.8; margin: 4px 0;'><span style='color: #666; width: 30px; display: inline-block;'>6</span><span style='margin-left: 60px; color: #0088ff;'>return</span> <span style='color: #ffffff;'>[map.get(complement), i];</span></div><div class='code-line' style='font-size: 16px; line-height: 1.8; margin: 4px 0;'><span style='color: #666; width: 30px; display: inline-block;'>7</span><span style='margin-left: 40px; color: #ffffff;'>}</span></div><div class='code-line' style='font-size: 16px; line-height: 1.8; margin: 4px 0;'><span style='color: #666; width: 30px; display: inline-block;'>8</span><span style='margin-left: 40px; color: #ffffff;'>map.set(nums[i], i);</span></div><div class='code-line' style='font-size: 16px; line-height: 1.8; margin: 4px 0;'><span style='color: #666; width: 30px; display: inline-block;'>9</span><span style='margin-left: 20px; color: #ffffff;'>}</span></div><div class='code-line' style='font-size: 16px; line-height: 1.8; margin: 4px 0;'><span style='color: #666; width: 30px; display: inline-block;'>10</span><span style='color: #ffffff;'>}</span></div></div>"
+      "html": "<div style='background:#f9fafb;height:100vh;font-family:Inter,sans-serif;padding:40px'><div style='position:absolute;top:20px;right:30px;color:#6b7280;font-weight:600'>CodeMaster</div><div style='max-width:800px;margin:0 auto;padding-top:60px'><h2 style='font-size:28px;color:#374151;margin-bottom:30px'>Optimized Implementation</h2><div style='background:#fff;padding:30px;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,0.1)'><div style='background:#1f2937;color:#f9fafb;padding:20px;border-radius:6px;font-family:monospace;font-size:13px;line-height:1.8'><div style='color:#6b7280'>// Hash Map Solution</div><div><span style='color:#3b82f6'>function</span> <span style='color:#f9fafb'>twoSum</span>(nums, target) {</div><div>  <span style='color:#3b82f6'>const</span> map = <span style='color:#3b82f6'>new</span> Map();</div><div></div><div>  <span style='color:#3b82f6'>for</span> (let i = 0; i < nums.length; i++) {</div><div>    <span style='color:#3b82f6'>const</span> complement = target - nums[i];</div><div>    </div><div>    <span style='color:#3b82f6'>if</span> (map.has(complement)) {</div><div>      <span style='color:#3b82f6'>return</span> [map.get(complement), i];</div><div>    }</div><div>    </div><div>    map.set(nums[i], i);</div><div>  }</div><div>}</div></div><div style='margin-top:20px'><h4 style='color:#2563eb;margin-bottom:10px'>Algorithm Steps</h4><ol style='color:#374151;line-height:1.8'><li>Calculate complement = target - current number</li><li>Check if complement exists in hash map</li><li>If found, return stored index and current index</li><li>If not found, store current number and index</li></ol></div></div></div></div>"
     },
     {
       "scene_id": 6,
-      "html": "<div class='title accent' style='font-size: 48px; margin-bottom: 30px; text-align: center;'>Step-by-Step Trace</div><div class='trace-container' style='display: flex; flex-direction: column; gap: 25px; max-width: 1600px;'><div class='trace-setup' style='text-align: center; font-size: 22px; margin-bottom: 20px;'>nums = [2, 7, 11, 15], target = 9</div><div class='trace-steps' style='display: flex; flex-direction: column; gap: 20px;'><div class='step' style='background: #1a1a1a; padding: 20px; border-radius: 8px; border-left: 4px solid #0088ff;'><div style='font-size: 18px; color: #0088ff; margin-bottom: 8px;'>Step 1: i = 0, nums[0] = 2</div><div style='font-size: 16px;'>complement = 9 - 2 = 7 | map = {} (empty) | Store: map[2] = 0</div></div><div class='step' style='background: #1a1a1a; padding: 20px; border-radius: 8px; border-left: 4px solid #00ff88;'><div style='font-size: 18px; color: #00ff88; margin-bottom: 8px;'>Step 2: i = 1, nums[1] = 7</div><div style='font-size: 16px;'>complement = 9 - 7 = 2 | map = {2: 0} | Found! Return [0, 1]</div></div></div><div class='final-result' style='text-align: center; font-size: 24px; color: #00ff88; font-weight: bold; margin-top: 20px;'>Result: [0, 1] ✓</div></div>"
+      "html": "<div style='background:#f9fafb;height:100vh;font-family:Inter,sans-serif;padding:40px'><div style='position:absolute;top:20px;right:30px;color:#6b7280;font-weight:600'>CodeMaster</div><div style='max-width:1000px;margin:0 auto;padding-top:60px'><h2 style='font-size:28px;color:#374151;margin-bottom:30px;text-align:center'>Step-by-Step Execution</h2><div style='background:#fff;padding:30px;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,0.1)'><div style='text-align:center;margin-bottom:25px;font-family:monospace'>nums = [2, 7, 11, 15], target = 9</div><div style='display:flex;flex-direction:column;gap:20px'><div style='border:1px solid #2563eb;background:#eff6ff;padding:20px;border-radius:6px'><div style='font-weight:600;color:#2563eb;margin-bottom:10px'>Step 1: i = 0, nums[0] = 2</div><div style='color:#374151;font-size:14px'>complement = 9 - 2 = 7</div><div style='color:#374151;font-size:14px'>map.has(7) = false</div><div style='color:#374151;font-size:14px'>map.set(2, 0) → map = {2: 0}</div></div><div style='border:2px solid #059669;background:#f0fdf4;padding:20px;border-radius:6px'><div style='font-weight:600;color:#059669;margin-bottom:10px'>Step 2: i = 1, nums[1] = 7</div><div style='color:#374151;font-size:14px'>complement = 9 - 7 = 2</div><div style='color:#374151;font-size:14px'>map.has(2) = true ✓</div><div style='color:#374151;font-size:14px'>return [map.get(2), 1] = [0, 1]</div></div></div><div style='text-align:center;margin-top:25px'><div style='background:#059669;color:white;padding:15px 30px;border-radius:6px;display:inline-block;font-weight:600'>Solution found: [0, 1]</div></div></div></div></div>"
     },
     {
       "scene_id": 7,
-      "html": "<div class='title primary' style='font-size: 48px; margin-bottom: 40px; text-align: center;'>Edge Cases</div><div class='edge-cases-container' style='display: flex; flex-direction: column; gap: 30px; max-width: 1400px;'><div class='case' style='background: #1a1a1a; padding: 25px; border-radius: 10px;'><div class='case-title' style='font-size: 22px; color: #0088ff; margin-bottom: 15px;'>Case 1: Duplicate Values</div><div class='case-example' style='font-size: 18px; line-height: 1.6;'>Input: nums = [3, 3], target = 6<br>Output: [0, 1]<br><span style='color: #888;'>Algorithm handles duplicates correctly</span></div></div><div class='case' style='background: #1a1a1a; padding: 25px; border-radius: 10px;'><div class='case-title' style='font-size: 22px; color: #ff4444; margin-bottom: 15px;'>Case 2: Invalid Inputs</div><div class='case-example' style='font-size: 18px; line-height: 1.6;'>Empty array: Impossible by constraint<br>Single element: Impossible by constraint<br><span style='color: #888;'>Problem guarantees exactly one solution</span></div></div><div class='case' style='background: #1a1a1a; padding: 25px; border-radius: 10px;'><div class='case-title' style='font-size: 22px; color: #00ff88; margin-bottom: 15px;'>Case 3: Large Numbers</div><div class='case-example' style='font-size: 18px; line-height: 1.6;'>Works with negative numbers and large values<br>Hash map lookup remains O(1)<br><span style='color: #888;'>Algorithm scales efficiently</span></div></div></div>"
+      "html": "<div style='background:#f9fafb;height:100vh;font-family:Inter,sans-serif;padding:40px'><div style='position:absolute;top:20px;right:30px;color:#6b7280;font-weight:600'>CodeMaster</div><div style='max-width:900px;margin:0 auto;padding-top:80px'><h2 style='font-size:28px;color:#374151;margin-bottom:30px'>Edge Cases</h2><div style='background:#fff;padding:30px;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,0.1)'><div style='display:grid;grid-template-columns:1fr 1fr;gap:25px'><div style='border:1px solid #d1d5db;padding:20px;border-radius:6px'><h4 style='color:#2563eb;margin-bottom:15px'>Duplicate Values</h4><div style='background:#f8fafc;padding:15px;border-radius:4px;font-family:monospace;font-size:14px;margin-bottom:10px'>nums = [3, 3]<br>target = 6<br>output = [0, 1]</div><p style='color:#374151;font-size:14px'>Algorithm checks complement before storing, handling duplicates correctly.</p></div><div style='border:1px solid #d1d5db;padding:20px;border-radius:6px'><h4 style='color:#2563eb;margin-bottom:15px'>Negative Numbers</h4><div style='background:#f8fafc;padding:15px;border-radius:4px;font-family:monospace;font-size:14px;margin-bottom:10px'>nums = [-1, -2, -3, -4]<br>target = -6<br>output = [1, 2]</div><p style='color:#374151;font-size:14px'>Hash map works with negative numbers without modification.</p></div></div><div style='margin-top:25px;padding:20px;background:#f0f9ff;border-radius:6px;border-left:4px solid #2563eb'><h4 style='color:#374151;margin-bottom:10px'>Problem Constraints</h4><ul style='color:#374151;font-size:14px;line-height:1.6'><li>Exactly one valid solution exists (guaranteed)</li><li>Cannot use same element twice</li><li>Array length ≥ 2</li></ul></div></div></div></div>"
     },
     {
       "scene_id": 8,
-      "html": "<div class='title secondary' style='font-size: 48px; margin-bottom: 40px; text-align: center;'>Complexity Summary</div><div class='summary-container' style='display: flex; flex-direction: column; align-items: center; gap: 40px;'><div class='complexity-table' style='background: #1a1a1a; border-radius: 10px; padding: 30px;'><div class='table-header' style='display: flex; font-size: 22px; font-weight: bold; border-bottom: 2px solid #333; padding-bottom: 15px; margin-bottom: 20px;'><div style='width: 200px; text-align: center; color: #ffffff;'>Approach</div><div style='width: 150px; text-align: center; color: #ff4444;'>Time</div><div style='width: 150px; text-align: center; color: #0088ff;'>Space</div></div><div class='table-row' style='display: flex; font-size: 18px; margin: 10px 0; opacity: 0.7;'><div style='width: 200px; text-align: center;'>Brute Force</div><div style='width: 150px; text-align: center; color: #ff4444;'>O(n²)</div><div style='width: 150px; text-align: center; color: #0088ff;'>O(1)</div></div><div class='table-row' style='display: flex; font-size: 18px; margin: 10px 0; background: rgba(0, 255, 136, 0.1); padding: 8px; border-radius: 5px;'><div style='width: 200px; text-align: center; color: #00ff88; font-weight: bold;'>Hash Map</div><div style='width: 150px; text-align: center; color: #00ff88; font-weight: bold;'>O(n)</div><div style='width: 150px; text-align: center; color: #00ff88; font-weight: bold;'>O(n)</div></div></div><div class='key-insights' style='text-align: center; font-size: 20px; max-width: 1200px; line-height: 1.6;'><div style='color: #00ff88; font-weight: bold; margin-bottom: 15px;'>Key Insights</div><div>✓ Trade space for time: O(n) space for O(n) time<br>✓ Single pass through array<br>✓ Pattern applies to complement-finding problems</div></div></div>"
+      "html": "<div style='background:#f9fafb;height:100vh;font-family:Inter,sans-serif;padding:40px'><div style='position:absolute;top:20px;right:30px;color:#6b7280;font-weight:600'>CodeMaster</div><div style='max-width:800px;margin:0 auto;padding-top:80px'><h2 style='font-size:28px;color:#374151;margin-bottom:30px'>Complexity Analysis</h2><div style='background:#fff;padding:30px;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,0.1)'><div style='display:grid;grid-template-columns:1fr 1fr;gap:30px;margin-bottom:30px'><div style='text-align:center;padding:20px;border:1px solid #fca5a5;background:#fef2f2;border-radius:6px'><h3 style='color:#dc2626;margin-bottom:10px'>Brute Force</h3><div style='color:#374151;font-size:14px;margin-bottom:15px'>Time: O(n²)<br>Space: O(1)</div><div style='color:#6b7280;font-size:12px'>Nested loops check all pairs</div></div><div style='text-align:center;padding:20px;border:1px solid #86efac;background:#f0fdf4;border-radius:6px'><h3 style='color:#059669;margin-bottom:10px'>Hash Map</h3><div style='color:#374151;font-size:14px;margin-bottom:15px'>Time: O(n)<br>Space: O(n)</div><div style='color:#6b7280;font-size:12px'>Single pass with O(1) lookups</div></div></div><div style='border-top:1px solid #e5e7eb;padding-top:20px'><h4 style='color:#2563eb;margin-bottom:15px'>Pattern Applications</h4><div style='color:#374151;font-size:14px;line-height:1.6'><p>This complement pattern applies to:</p><ul style='margin:10px 0;padding-left:20px'><li>Three Sum (3Sum)</li><li>Four Sum (4Sum)</li><li>Two Sum variations (sorted array, BST)</li><li>Subarray sum problems</li></ul></div></div></div></div></div>"
     }
   ]
 }`;
@@ -390,7 +365,25 @@ Return ONLY this JSON structure with complete HTML for all ${scriptJson.scenes?.
 
         return results;
     }
+    estimateTextDuration(text) {
+        // Type checking to handle non-string inputs
+        if (typeof text !== 'string') {
+            console.warn(`Warning: Expected string but got ${typeof text}`);
+            // Handle non-string input gracefully
+            if (text === null || text === undefined) {
+                return this.defaultSceneDuration;
+            }
+            // Convert to string if possible
+            text = String(text);
+        }
 
+        // Now we can safely use string methods
+        const words = text.split(/\s+/).filter(word => word.length > 0);
+
+        // Calculate duration based on word count (approx 2-3 words per second for natural speech)
+        const wordDuration = 0.4; // seconds per word
+        return Math.max(this.defaultSceneDuration, Math.ceil(words.length * wordDuration));
+    }
     async generateScriptJson(question) {
         const prompt = this.createScriptGenerationPrompt(question);
         const response = await this.callGeminiAPI(prompt);

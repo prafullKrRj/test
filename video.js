@@ -1,8 +1,8 @@
-const fs = require('fs').promises;
 const path = require('path');
 const puppeteer = require('puppeteer');
 const {exec} = require('child_process');
 const {promisify} = require('util');
+const fetch = require('node-fetch');
 
 const execAsync = promisify(exec);
 
@@ -228,22 +228,49 @@ class VideoGenerator {
 
     async createSceneAudio(script, duration, outputFile) {
         try {
-            console.log(`🔊 Creating audio (${duration}s) for script: "${script.substring(0, 50)}..."`);
+            console.log(`🔊 Creating TTS audio for script: "${script.substring(0, 50)}..."`);
 
-            // Calculate words per minute for more natural pacing
-            const words = script.split(/\s+/).filter(w => w.length > 0);
-            const wordsPerMinute = 150; // Natural speaking pace
-            const naturalDuration = Math.max(duration, (words.length / wordsPerMinute) * 60);
+            // Create a temporary file for the speech audio
+            const speechFile = path.join(this.tempDir, `speech_${Date.now()}.wav`);
 
-            // Create a pleasant background tone with varying frequency
-            const frequency = 440 + (Math.random() * 200); // Vary between 440-640 Hz
-            const command = `ffmpeg -y -f lavfi -i "sine=frequency=${frequency}:duration=${naturalDuration}" -ar 44100 -ac 2 -filter:a "volume=0.1" "${outputFile}"`;
+            // Use Google Text-to-Speech API with node-fetch
+            const url = `https://texttospeech.googleapis.com/v1/text:synthesize?key=${this.apiKey}`;
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    input: { text: script },
+                    voice: { languageCode: 'en-US', ssmlGender: 'NEUTRAL' },
+                    audioConfig: { audioEncoding: 'LINEAR16' }
+                })
+            });
 
+            if (!response.ok) {
+                throw new Error(`TTS API returned ${response.status}: ${await response.text()}`);
+            }
+
+            const data = await response.json();
+            const audioContent = Buffer.from(data.audioContent, 'base64');
+            await fs.writeFile(speechFile, audioContent);
+
+            // Get the duration of the speech file
+            const { stdout } = await execAsync(`ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 "${speechFile}"`);
+            const speechDuration = parseFloat(stdout.trim());
+
+            // Ensure the audio is at least as long as required duration
+            const finalDuration = Math.max(speechDuration, duration);
+
+            // Add silence if needed to match the required duration
+            const command = `ffmpeg -y -i "${speechFile}" -filter_complex "apad=pad_dur=${finalDuration - speechDuration}" -ar 44100 -ac 2 "${outputFile}"`;
             await execAsync(command);
-            console.log(`✅ Audio created (${naturalDuration}s)`);
-            return naturalDuration;
+
+            // Remove temporary file
+            await fs.unlink(speechFile).catch(() => {});
+
+            console.log(`✅ TTS audio created (${finalDuration.toFixed(2)}s)`);
+            return finalDuration;
         } catch (error) {
-            console.error('❌ Error creating audio:', error.message);
+            console.error('❌ Error creating TTS audio:', error.message);
             return await this.createSilentAudio(duration, outputFile);
         }
     }
