@@ -1,29 +1,20 @@
 {
-  "name": "youtube-video-generator",
+  "name": "leetcode-video-generator",
   "version": "1.0.0",
-  "description": "Generate educational YouTube videos from JSON scripts",
-  "main": "video-generator.js",
+  "description": "Automated LeetCode video generation pipeline",
+  "main": "pipeline.js",
   "scripts": {
-    "start": "node video-generator.js",
-    "dev": "nodemon video-generator.js",
-    "install-deps": "npm install && npm run install-system-deps",
-    "install-system-deps": "echo 'Please install FFmpeg on your system: https://ffmpeg.org/download.html'"
+    "start": "node example.js",
+    "test": "node video.js",
+    "pipeline": "node pipeline.js"
   },
   "dependencies": {
-    "puppeteer": "^22.8.2",
-    "say": "^0.16.0"
+    "puppeteer": "^21.0.0",
+    "node-fetch": "^3.3.2"
   },
-  "devDependencies": {
-    "nodemon": "^3.0.1"
+  "engines": {
+    "node": ">=16.0.0"
   },
-  "keywords": [
-    "video",
-    "youtube",
-    "tts",
-    "html",
-    "ffmpeg",
-    "automation"
-  ],
   "author": "prafullKrRj",
   "license": "MIT"
 }
